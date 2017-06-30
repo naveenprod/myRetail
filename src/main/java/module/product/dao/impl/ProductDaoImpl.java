@@ -45,9 +45,9 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return prod;
 	}
-	
-	public static void main(String[] args) {
-		new ProductDaoImpl().findPrice("15117729");
+	@Override
+	public Product updateProduct(String id, String toBeUpdate) {
+		return null;
 	}
 
 }
