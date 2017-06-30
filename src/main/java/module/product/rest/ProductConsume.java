@@ -35,8 +35,4 @@ public class ProductConsume {
 		prodResponse.setProductName(prodName);
 		return prodResponse;
 	}
-	
-	public static void main(String[] args) {
-		new ProductConsume().consumeProductService("15117729");
-	}
 }
