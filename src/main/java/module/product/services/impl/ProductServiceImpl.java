@@ -11,15 +11,12 @@ import module.product.services.ProductService;
 
 import org.json.JSONObject;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-
 
 public class ProductServiceImpl implements ProductService{
 
 	private static ProductServiceImpl m_instance = new ProductServiceImpl();
 	private static JSONObject response;
+	ProductDao prodDao = new ProductDaoImpl();
 	private ProductServiceImpl(){
 	}
 	public static ProductServiceImpl getInstance(){
@@ -42,6 +39,11 @@ public class ProductServiceImpl implements ProductService{
 		response = finalResponse(flag, prodString,productResponse.getError()!=null?productResponse.getError():prod.getError());
 		return response.toString();
 	}
+	
+	@Override
+	public String updateProduct(Product product) {
+	return null;
+	}
 
 	private JSONObject makeResponse(ProductConsumerResponse productResponse, Product priceResponse){
 		JSONObject response = new JSONObject();
@@ -58,27 +60,10 @@ public class ProductServiceImpl implements ProductService{
 		response.put("response",json);
 		return response;
 	}
-	/*private String makePriceResponse(Product prod){
-		String priceResponse="";
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			priceResponse = mapper.writeValueAsString(prod);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return priceResponse;
-		}
-		return priceResponse;
-	}*/
 
 	private Product findProductPrice(String id){
-		ProductDao prodDao = new ProductDaoImpl();
 		Product prod = prodDao.findPrice(id);
 		return prod;
-	}
-
-	public static void main(String[] args) {
-
-		new ProductServiceImpl().getProduct("16696651");
 	}
 
 	private JSONObject finalResponse(boolean flag, JSONObject prodString,String error){
@@ -91,5 +76,6 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return response;
 	}
+	
 
 }
